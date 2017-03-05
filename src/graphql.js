@@ -3,9 +3,8 @@ var graphQLEndpoint = 'https://api.graph.cool/simple/v1/cizv9xq1aeviz0154kakoee2
 function createPokemon() {
   var name = $('#pokemon-name').val();
   console.log('createPokemon', name)
-  $.ajax({
+  $.post({
     url: graphQLEndpoint,
-    type: 'POST',
     data: JSON.stringify({ "query": "mutation { createPokemon(name: \"" + name + "\" ) { id name } } " }),
     contentType: 'application/json'
   }).done(function(response, error) {
@@ -20,10 +19,9 @@ function createPokemon() {
 
 function fetchAllPokemons() {
   console.log('fetchAllPokemons')
-  $.ajax({
+  $.post({
     url: graphQLEndpoint,
-    type: 'POST',
-    data: '{ "query": " { allPokemons { id name } } " }',
+    data: JSON.stringify({ "query": " { allPokemons { id name } } " }),
     contentType: 'application/json'
   }).done(function(response, error) {
     console.log('received data', response, error);
