@@ -1,4 +1,4 @@
-var graphQLEndpoint = 'https://api.graph.cool/simple/v1/cizv9xq1aeviz0154kakoee26';
+var graphQLEndpoint = 'https://api.graph.cool/simple/v1/__YOUR_PROJECT_ID__';
 
 function createPokemon() {
   var name = $('#pokemon-name').val();
@@ -7,8 +7,8 @@ function createPokemon() {
     url: graphQLEndpoint,
     data: JSON.stringify({ "query": "mutation { createPokemon(name: \"" + name + "\" ) { id name } } " }),
     contentType: 'application/json'
-  }).done(function(response, error) {
-    console.log('received data', response, error);
+  }).done(function(response) {
+    console.log('Received response: ', response);
     var pokemonList = document.getElementById("pokemon-list");
     var pokemon = response.data.createPokemon
     var li = document.createElement("li");
@@ -23,8 +23,8 @@ function fetchAllPokemons() {
     url: graphQLEndpoint,
     data: JSON.stringify({ "query": " { allPokemons { id name } } " }),
     contentType: 'application/json'
-  }).done(function(response, error) {
-    console.log('received data', response, error);
+  }).done(function(response) {
+    console.log('Received response: ', response);
     var pokemonList = document.getElementById("pokemon-list");
     response.data.allPokemons.forEach(function (pokemon) {
         var li = document.createElement("li");
